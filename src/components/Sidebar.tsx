@@ -26,34 +26,12 @@ import bpp from "../asset/bpp.png";
 import sen from "../asset/kesenatoran.png";
 import about from "../asset/about.png";
 
-const MainBtn = () => {
-  return (
-    <Flex
-      bg={"#2D83BA"}
-      boxShadow={"inset 0px 3.48837px 3.48837px rgba(0, 0, 0, 0.25)"}
-      borderRadius={20}
-      justifyContent={"center"}
-    >
-      <Text
-        fontFamily={"Open Sans, sans-serif"}
-        fontWeight={800}
-        fontSize={"2xl"}
-        lineHeight={30}
-        letterSpacing={"0.1em"}
-        textShadow={"0px 2.35338px 25.8872px rgba(58, 58, 60, 0.2)"}
-        color={"white"}
-      >
-        ABOUT
-      </Text>
-    </Flex>
-  );
-};
-
 const Sidebar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box zIndex={4}>
       <Box
+        zIndex={4}
         pos={"fixed"}
         top={7}
         left={-7}

@@ -15,13 +15,22 @@ import {
   Center,
   Spacer,
   Slider,
+  Divider,
+  FormControl,
+  Input,
+  FormLabel,
+  Show,
+  Hide,
 } from "@chakra-ui/react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 
 import header1 from "../asset/header/1.png";
 import header2 from "../asset/header/2.png";
 import header3 from "../asset/header/3.png";
 import header4 from "../asset/header/4.png";
+
+import bgfoot from "../asset/bgfoot.svg";
+import maps from "../asset/maps.svg";
 
 import nilai from "../asset/nilai.svg";
 import sejarah from "../asset/sejarah.svg";
@@ -34,14 +43,34 @@ import glider from "../asset/glider.svg";
 import gliderbiru from "../asset/gliderbiru.svg";
 import gliderabu from "../asset/gliderabu.svg";
 
-import senatoricon from "../asset/senatoricon.svg";
-import dpaicon from "../asset/dpaicon.svg";
-import bppicon from "../asset/bppicon.svg";
+import senatoricon from "../asset/senatoricon.png";
+import dpaicon from "../asset/dpaicon.png";
+import bppicon from "../asset/bppicon.png";
 
 import envelope from "../asset/envelope.svg";
 import location from "../asset/location.svg";
 
+import leftdouble from "../asset/leftdouble.svg";
+import rightdouble from "../asset/rightdouble.svg";
+
+import igblack from "../asset/igblack.svg";
+import linkedinblack from "../asset/linkedinblack.svg";
+import twitterblack from "../asset/twitterblack.svg";
+
+import data from "../dummydata";
+
 import useDraggableScroll from "use-draggable-scroll";
+
+import { WPContext } from "../provider/Provider";
+
+import axios from "axios";
+import parse from "html-react-parser";
+import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+
+const MotionBox = motion(Box);
+const MotionText = motion(Text);
+const MotionFlex = motion(Flex);
 
 const ModalAbout = ({ type }: { type: string }) => {
   return (
@@ -149,7 +178,7 @@ const CardBKO = ({ type }: { type: string }) => {
           src={
             type === "bpp" ? bppicon : type === "dpa" ? dpaicon : senatoricon
           }
-          boxSize={200}
+          boxSize={300}
         />
       </Center>
       <Text textAlign={"justify"} mt={10} fontWeight={400} fontSize={"lg"}>
@@ -163,7 +192,7 @@ const CardBKO = ({ type }: { type: string }) => {
       <Box
         mt={10}
         bg={"#2D83BA"}
-        fontSize={"2xl"}
+        fontSize={{ xl: "xl", "2xl": "2xl" }}
         fontWeight={800}
         textShadow={"0px 3.03586px 33.3945px rgba(58, 58, 60, 0.2)"}
         letterSpacing={"0.1em"}
@@ -182,73 +211,60 @@ const CardBKO = ({ type }: { type: string }) => {
   );
 };
 
-const CardCarousel = ({ alter }: { alter?: boolean }) => {
+const CardCarousel = ({ alter, post }: { alter?: boolean; post: any }) => {
+  const navigate = useNavigate();
   return (
-    <Box>
-      <Flex
-        bg={
-          "linear-gradient(144.34deg, rgba(255, 255, 255, 0.65) -8.63%, rgba(255, 255, 255, 0.28) 40.16%, rgba(255, 255, 255, 0.14) 105.72%)"
-        }
-        boxShadow={
-          "-2.67657px 1.96282px 13.026px rgba(40, 47, 78, 0.1), inset -1.4783px 2.58703px 6.28278px rgba(0, 0, 0, 0.25)"
-        }
-        backdropFilter={"blur(1.60594px)"}
-        borderRadius={"full"}
-        boxSize={70}
-        justifyContent={"center"}
-        alignItems={"center"}
-        pos={"relative"}
-        left={"40%"}
-        top={"8%"}
+    <Flex
+      flexDir={"column"}
+      alignItems={"center"}
+      w={{ lg: "25vw", xl: "18vw" }}
+      p={10}
+      textAlign={"center"}
+      bg={alter ? "#28668D" : "#2D83BA"}
+      boxShadow={"6px 6px 6px #D9D9D9"}
+      borderRadius={"51px"}
+      color={"white"}
+      id={post.id}
+    >
+      <Text
+        fontSize={"xl"}
+        textTransform={"uppercase"}
+        letterSpacing={"0.1em"}
+        fontWeight={800}
+        mb={5}
       >
-        <Image src={gliderabu} boxSize={50} />
-      </Flex>
-      <Flex
-        flexDir={"column"}
-        alignItems={"center"}
-        w={"18vw"}
-        h={"40vh"}
-        p={10}
-        textAlign={"center"}
-        bg={alter ? "#28668D" : "#2D83BA"}
-        boxShadow={"6px 6px 6px #D9D9D9"}
-        borderRadius={"51px"}
-        color={"white"}
+        {post ? post.title.rendered : "lorem lorem terlorem lorem"}
+      </Text>
+      <Box
+        fontSize={"lg"}
+        letterSpacing={"0.1em"}
+        fontWeight={400}
+        mb={5}
+        // h={"20vh"}
+        // overflow={"hidden"}
+      >
+        {post ? parse(post.excerpt.rendered) : "lorem lorem terlorem lorem"}
+      </Box>
+      <Spacer />
+      <Box
+        w={"full"}
+        bg={alter ? "#fff" : "rgba(217, 217, 217, 0.64)"}
+        color={"#3A3A3C"}
+        py={2}
+        borderRadius={"27px"}
+        boxShadow={"inset 0px 4px 4px rgba(0, 0, 0, 0.25)"}
       >
         <Text
-          fontSize={"xl"}
-          textTransform={"uppercase"}
+          fontSize={"lg"}
           letterSpacing={"0.1em"}
-          fontWeight={800}
-          mb={3}
+          fontWeight={400}
+          cursor={"pointer"}
+          onClick={() => navigate("/post/" + post.id)}
         >
-          Lorem, ipsum dolor
+          Selengkapnya
         </Text>
-        <Text fontSize={"lg"} letterSpacing={"0.1em"} fontWeight={400} mb={3}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates,
-          error.
-        </Text>
-        <Spacer />
-        <Box
-          w={"full"}
-          bg={alter ? "#fff" : "rgba(217, 217, 217, 0.64)"}
-          color={"#3A3A3C"}
-          py={2}
-          borderRadius={"27px"}
-          boxShadow={"inset 0px 4px 4px rgba(0, 0, 0, 0.25)"}
-        >
-          <Text
-            fontSize={"lg"}
-            letterSpacing={"0.1em"}
-            fontWeight={400}
-            cursor={"pointer"}
-            onClick={() => console.log("clicked")}
-          >
-            Selanjutnya
-          </Text>
-        </Box>
-      </Flex>
-    </Box>
+      </Box>
+    </Flex>
   );
 };
 
@@ -258,13 +274,23 @@ const Landing = () => {
   const [state, setState] = useState(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenBehind,
+    onOpen: onOpenBehind,
+    onClose: onCloseBehind,
+  } = useDisclosure();
   const [stateAbout, setAbout] = useState("");
 
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const { onMouseDown } = useDraggableScroll(scrollRef, {
-    direction: "horizontal",
-  });
+  const slide = (shift: number) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft += shift;
+    }
+  };
+
+  const [allPost, setAllPost] = useState<any[]>();
+  const wp = useContext(WPContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -273,18 +299,36 @@ const Landing = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // useEffect(() => {
+  //   axios
+  //     .get(`${wp.wordpressLink}/wp-json/wp/v2/posts`)
+  //     .then((res) => setAllPost(res.data));
+  // }, []);
+
   return (
     <Box w={"full"}>
       <Box w={"full"}>
-        <Box
-          bg={`linear-gradient(180deg,rgba(231, 231, 232, 0.3) 2.96% , rgba(109, 213, 250, 0.5) 100.73%, #2980B9 300.96%), url(${headerImages[state]})`}
+        <MotionBox
+          key={state}
           w={"full"}
           height={"3xl"}
-          objectFit={"cover"}
+          bg={`linear-gradient(180deg,rgba(231, 231, 232, 0.3) 2.96% , rgba(109, 213, 250, 0.5) 100.73%, #2980B9 300.96%), url(${headerImages[state]})`}
+          backgroundRepeat={"no-repeat"}
+          backgroundSize={"cover"}
+          backgroundPosition={"center"}
           display={"flex"}
           flexDir={"column"}
           justifyContent={"flex-end"}
           alignItems={"center"}
+          animate={{ opacity: [0, 1, 1, 0] }}
+          transition={{ duration: 5, times: [0, 0.2, 0.8, 0.98] }}
+        />
+        <Flex
+          flexDir={"column"}
+          alignItems={"center"}
+          w={"full"}
+          pos={"absolute"}
+          top={480}
         >
           <Flex
             fontSize={"5xl"}
@@ -301,7 +345,7 @@ const Landing = () => {
             <Text>TEKNIK PENERBANGAN</Text>
           </Flex>
           <Image src={glider} boxSize={125} mb={5} />
-        </Box>
+        </Flex>
       </Box>
 
       <Flex
@@ -457,74 +501,299 @@ const Landing = () => {
         alignItems={"center"}
         // h={"100vh"}
       >
-        <Text
-          fontWeight={800}
-          fontSize={"5xl"}
-          letterSpacing={"0.1em"}
-          color={"#3A3A3C"}
+        <Flex
+          flexDir={"column"}
+          w={"full"}
+          alignItems={{ base: "center", "2xl": "flex-end" }}
         >
-          BERITA TERKINI DARI KMPN
-        </Text>
+          <Text
+            fontWeight={800}
+            fontSize={"5xl"}
+            letterSpacing={"0.1em"}
+            color={"#3A3A3C"}
+            w={{ base: "100%", "2xl": "50%" }}
+            textAlign={"center"}
+          >
+            BERITA TERKINI DARI KMPN
+          </Text>
+          <Divider
+            border={"8px solid"}
+            borderColor={"black"}
+            w={{ base: "70%", "2xl": "50%" }}
+            opacity={1}
+          />
+        </Flex>
 
         <Flex
           w={"full"}
-          mt={8}
-          overflow={"hidden"}
+          mt={20}
+          css={{
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+          scrollBehavior={"smooth"}
+          overflow={"scroll"}
           ref={scrollRef}
-          onMouseDown={onMouseDown}
         >
           <Flex gap={20}>
-            <CardCarousel />
-            <CardCarousel alter />
-            <CardCarousel />
-            <CardCarousel alter />
-            <CardCarousel />
-            <CardCarousel alter />
-            <CardCarousel />
-            <CardCarousel alter />
-            <CardCarousel />
-            <CardCarousel alter />
-            <CardCarousel />
-            <CardCarousel alter />
-            <CardCarousel />
-            <CardCarousel alter />
+            {allPost
+              ? allPost.map((post, index) => {
+                  if (index % 2 == 0) {
+                    return <CardCarousel post={post} />;
+                  } else {
+                    return <CardCarousel post={post} alter />;
+                  }
+                })
+              : data.map((post, index) => {
+                  if (index % 2 == 0) {
+                    return <CardCarousel post={post} />;
+                  } else {
+                    return <CardCarousel post={post} alter />;
+                  }
+                })}
+            {allPost
+              ? allPost.map((post, index) => {
+                  if (index % 2 == 0) {
+                    return <CardCarousel post={post} />;
+                  } else {
+                    return <CardCarousel post={post} alter />;
+                  }
+                })
+              : data.map((post, index) => {
+                  if (index % 2 == 0) {
+                    return <CardCarousel post={post} />;
+                  } else {
+                    return <CardCarousel post={post} alter />;
+                  }
+                })}
+          </Flex>
+        </Flex>
+
+        <Flex mt={10} w={"80%"}>
+          <Flex
+            bg={" #E6E7E8"}
+            boxShadow={"inset 0px 8.94118px 8.94118px rgba(0, 0, 0, 0.25)"}
+            boxSize={45}
+            borderRadius={"full"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            cursor={"pointer"}
+            onClick={() => slide(-1500)}
+          >
+            <Image src={leftdouble} boxSize={15} />
+          </Flex>
+          <Spacer />
+          <Flex
+            bg={" #E6E7E8"}
+            boxShadow={"inset 0px 8.94118px 8.94118px rgba(0, 0, 0, 0.25)"}
+            boxSize={45}
+            borderRadius={"full"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            cursor={"pointer"}
+            onClick={() => slide(1500)}
+          >
+            <Image src={rightdouble} boxSize={15} />
           </Flex>
         </Flex>
       </Flex>
 
       <Flex
-        p={20}
-        pr={60}
-        mt={40}
-        justifyContent={"space-between"}
+        flexDir={"column"}
+        px={20}
+        // pt={200}
+        // pb={100}
+        h={"3xl"}
+        mt={20}
+        justifyContent={"center"}
+        alignItems={"center"}
         color={"white"}
         bg={"#2D83BA"}
+        bgImage={bgfoot}
       >
-        <Spacer />
         <Flex
-          flexDir={"column"}
-          w={"15%"}
-          textAlign={"justify"}
+          justifyContent={"center"}
           alignItems={"center"}
-          letterSpacing={"0.1em"}
-          fontWeight={400}
-          fontSize={"xl"}
-          gap={1}
+          w={"full"}
+          gap={20}
         >
-          <Image src={location} boxSize={62} />
-          <Text fontWeight={700}>Alamat Sekretariat</Text>
-          <Text>
-            4J65+383, Kampus ITB Ganesha Jalan D, Gedung FTMD, Lb. Siliwangi,
-            Kecamatan Coblong, Kota Bandung, Jawa Barat 40132
-          </Text>
-          <Image src={envelope} boxSize={62} />
-          <Text fontWeight={700}>E-Mail</Text>
-          <Text>kmpn_itb@km.itb.ac.id</Text>
+          <Flex
+            flexDir={"column"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            letterSpacing={"0.1em"}
+            fontWeight={400}
+            fontSize={"2xl"}
+          >
+            <Text fontWeight={700}>Alamat Sekretariat</Text>
+            <Image boxSize={"xs"} src={maps} borderRadius={35} />
+          </Flex>
+          <Flex
+            flexDir={"column"}
+            fontSize={{ base: "3xl", xl: "5xl" }}
+            justifyContent={"center"}
+            alignItems={"center"}
+            border={"2px solid #FFFFFF"}
+            p={20}
+            borderRadius={40}
+          >
+            <Text letterSpacing={"0.1em"} fontWeight={800}>
+              SEND US A MESSAGE
+            </Text>
+            <MotionFlex
+              mt={10}
+              bg={"#1C5579"}
+              boxShadow={
+                "0px 8.06091px 8.06091px rgba(0, 0, 0, 0.25), inset 6.04568px 8.06091px 8.06091px rgba(65, 64, 66, 0.25)"
+              }
+              alignItems={"center"}
+              justifyContent={"center"}
+              py={2}
+              w={"40%"}
+              borderRadius={50}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Text
+                fontSize={{ base: "2xl", xl: "4xl" }}
+                fontWeight={600}
+                letterSpacing={"0.1em"}
+              >
+                Here!
+              </Text>
+            </MotionFlex>
+          </Flex>
+        </Flex>
+        <Box textAlign={"center"} w={"full"}>
+          <MotionText
+            mt={20}
+            fontWeight={700}
+            fontSize={{ base: "2xl", xl: "3xl" }}
+            letterSpacing={"0.1em"}
+            fontStyle={"italic"}
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            Untuk KMPN, Dirgantara, dan Indonesia yang jaya selama-lamanya!
+          </MotionText>
+        </Box>
+      </Flex>
+
+      <Flex
+        w={"full"}
+        p={10}
+        letterSpacing={"0.1em"}
+        fontWeight={400}
+        fontSize={"xl"}
+      >
+        <Flex alignItems={"center"} gap={5}>
+          <Image src={twitterblack} />
+          <Image src={linkedinblack} />
+          <Image src={igblack} />
+          <Text>FOLLOW US!</Text>
         </Flex>
         <Spacer />
-        <Box letterSpacing={"0.1em"} fontWeight={800} fontSize={"5xl"} pt={10}>
-          <Text>SEND US A MESSAGE!</Text>
-        </Box>
+        <Flex alignItems={"center"} cursor={"pointer"} onClick={onOpenBehind}>
+          <MotionText
+            initial={{ fontWeight: 400 }}
+            whileHover={{ fontWeight: 600 }}
+          >
+            BEHIND THIS WEBSITE
+          </MotionText>
+        </Flex>
+
+        <Modal isOpen={isOpenBehind} onClose={onCloseBehind} size={"6xl"}>
+          <ModalOverlay />
+          <ModalContent
+            bg={"#2980B9"}
+            boxShadow={"11px 11px 30px 5px rgba(0, 0, 0, 0.25)"}
+            p={20}
+            color={"#fff"}
+            borderRadius={50}
+          >
+            <ModalCloseButton size={"lg"} top={10} right={10} />
+            <Flex
+              flexDir={"column"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Text fontSize={"2xl"} fontWeight={600} letterSpacing={"0.1em"}>
+                BEHIND THIS WEBSITE
+              </Text>
+              <Flex mt={10} gap={20}>
+                <Flex
+                  flexDir={"column"}
+                  borderRadius={50}
+                  bg={"#D9D9D9"}
+                  p={10}
+                  color={"#000"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  fontSize={"2xl"}
+                  fontWeight={600}
+                  letterSpacing={"0.1em"}
+                  gap={10}
+                >
+                  <Text fontWeight={700}>POSISI</Text>
+                  <Box
+                    boxSize={150}
+                    border={"1px solid #000000"}
+                    bg={"#D9D9D9"}
+                    borderRadius={"full"}
+                  />
+                  <Text>Nama</Text>
+                </Flex>
+                <Flex
+                  flexDir={"column"}
+                  borderRadius={50}
+                  bg={"#D9D9D9"}
+                  p={10}
+                  color={"#000"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  fontSize={"2xl"}
+                  fontWeight={600}
+                  letterSpacing={"0.1em"}
+                  gap={10}
+                >
+                  <Text fontWeight={700}>POSISI</Text>
+                  <Box
+                    boxSize={150}
+                    border={"1px solid #000000"}
+                    bg={"#D9D9D9"}
+                    borderRadius={"full"}
+                  />
+                  <Text>Nama</Text>
+                </Flex>
+                <Flex
+                  flexDir={"column"}
+                  borderRadius={50}
+                  bg={"#D9D9D9"}
+                  p={10}
+                  color={"#000"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  fontSize={"2xl"}
+                  fontWeight={600}
+                  letterSpacing={"0.1em"}
+                  gap={10}
+                >
+                  <Text fontWeight={700}>POSISI</Text>
+                  <Box
+                    boxSize={150}
+                    border={"1px solid #000000"}
+                    bg={"#D9D9D9"}
+                    borderRadius={"full"}
+                  />
+                  <Text>Nama</Text>
+                </Flex>
+              </Flex>
+            </Flex>
+          </ModalContent>
+        </Modal>
       </Flex>
     </Box>
   );
