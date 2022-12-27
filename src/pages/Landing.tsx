@@ -79,11 +79,16 @@ const ModalAbout = ({ type }: { type: string }) => {
       color={"white"}
       borderRadius={30}
       p={7}
-      h={"lg"}
+      h={{ sm: "2xl", md: "3xl", lg: "lg" }}
       boxShadow={"inset 11px 11px 30px 5px rgba(0, 0, 0, 0.25)"}
     >
       <ModalHeader>
-        <Flex alignItems={"center"} gap={3}>
+        <Flex
+          justifyContent={{ sm: "center", lg: "inherit" }}
+          alignItems={"center"}
+          gap={3}
+          flexDir={{ sm: "column", lg: "row" }}
+        >
           <Image
             src={
               type === "sejarah"
@@ -92,9 +97,9 @@ const ModalAbout = ({ type }: { type: string }) => {
                 ? tujuanwhite
                 : nilaiwhite
             }
-            boxSize={20}
+            boxSize={{ sm: 40, lg: 20 }}
           />
-          <Text fontSize={"3xl"}>
+          <Text fontSize={{ sm: "4xl", lg: "3xl" }}>
             {type === "sejarah"
               ? "Sejarah"
               : type === "tujuan"
@@ -110,15 +115,21 @@ const ModalAbout = ({ type }: { type: string }) => {
           alignItems={"center"}
           h={"80%"}
           w={"full"}
-          p={10}
+          p={{ sm: 3, md: 10 }}
         >
           {type === "sejarah" ? (
-            <Text fontSize={"2xl"} textAlign={"center"}>
+            <Text
+              fontSize={{ sm: "lg", md: "xl", lg: "2xl" }}
+              textAlign={"center"}
+            >
               KMPN ITB berdiri pada tanggal 6 Agustus 1997 dengan menjunjung
               tinggi Pancasila
             </Text>
           ) : type === "tujuan" ? (
-            <OrderedList fontSize={"2xl"} textAlign={"justify"}>
+            <OrderedList
+              fontSize={{ sm: "md", md: "lg", lg: "2xl" }}
+              textAlign={"justify"}
+            >
               <ListItem>
                 Mendukung berlangsungnya proses pendidikan di Program Studi
                 Teknik Dirgantara Institut Teknologi Bandung,
@@ -145,7 +156,10 @@ const ModalAbout = ({ type }: { type: string }) => {
                 5 NILAI KMPN
               </Text>
 
-              <OrderedList fontSize={"2xl"} textAlign={"justify"}>
+              <OrderedList
+                fontSize={{ sm: "lg", md: "xl", lg: "2xl" }}
+                textAlign={"justify"}
+              >
                 <ListItem>Kebersamaan dalam kekeluargaan,</ListItem>
                 <ListItem>Demokratis,</ListItem>
                 <ListItem>Kemahasiswaan yang profesional,</ListItem>
@@ -162,52 +176,125 @@ const ModalAbout = ({ type }: { type: string }) => {
 
 const CardBKO = ({ type }: { type: string }) => {
   return (
-    <Flex flexDir={"column"} alignItems={"center"} w={"full"}>
-      <Center
-        borderRadius={"full"}
-        bg={
-          "radial-gradient(100.07% 99.2% at 28.21% 11.53%, rgba(255, 255, 255, 0.65) 34.45%, rgba(255, 255, 255, 0.28) 62.42%, rgba(255, 255, 255, 0.14) 100%) "
-        }
-        boxShadow={
-          "-7.24229px 5.31101px 35.2458px rgba(40, 47, 78, 0.1), inset -4px 7px 17px rgba(0, 0, 0, 0.25)"
-        }
-        backdropFilter={"blur(4.34537px)"}
-        boxSize={300}
-      >
-        <Image
-          src={
-            type === "bpp" ? bppicon : type === "dpa" ? dpaicon : senatoricon
-          }
-          boxSize={300}
-        />
-      </Center>
-      <Text textAlign={"justify"} mt={10} fontWeight={400} fontSize={"lg"}>
-        {type === "bpp"
-          ? "Badan Pelaksana Program (BPP) adalah lembaga eksekutif tertinggi dalam KMPN ITB dan bertanggungjawab kepada DPA."
-          : type === "dpa"
-          ? "Dewan Perwakilan Anggota (DPA) adalah lembaga pemegang kedaulatan tertinggi dalam Keluarga Mahasiswa Teknik Penerbangan yang merupakan perwakilan dari seluruh anggota."
-          : "Kesenatoran merupakan sebuah tim yang dibentuk dengan tujuan membantu Senator dalam menjalankan fungsi penarikan aspirasi dan penyampaian keputusan yang dibuat oleh Kongres KM ITB kepada anggota KMPN."}
-      </Text>
-      <Spacer />
-      <Box
-        mt={10}
-        bg={"#2D83BA"}
-        fontSize={{ xl: "xl", "2xl": "2xl" }}
-        fontWeight={800}
-        textShadow={"0px 3.03586px 33.3945px rgba(58, 58, 60, 0.2)"}
-        letterSpacing={"0.1em"}
-        color={"#FFF"}
-        w={"75%"}
-        textAlign={"center"}
-        p={3}
-        boxShadow={"inset 0px 4.5px 4.5px rgba(0, 0, 0, 0.25)"}
-        borderRadius={50}
-      >
-        <Text>
-          {type === "bpp" ? "BPP" : type === "dpa" ? "DPA" : "KESENATORAN"}
-        </Text>
-      </Box>
-    </Flex>
+    <>
+      <Show above="lg">
+        <Flex flexDir={"column"} alignItems={"center"} w={"full"}>
+          <Center
+            borderRadius={"full"}
+            bg={
+              "radial-gradient(100.07% 99.2% at 28.21% 11.53%, rgba(255, 255, 255, 0.65) 34.45%, rgba(255, 255, 255, 0.28) 62.42%, rgba(255, 255, 255, 0.14) 100%) "
+            }
+            boxShadow={
+              "-7.24229px 5.31101px 35.2458px rgba(40, 47, 78, 0.1), inset -4px 7px 17px rgba(0, 0, 0, 0.25)"
+            }
+            backdropFilter={"blur(4.34537px)"}
+            boxSize={{ lg: 150, xl: 300 }}
+          >
+            <Image
+              src={
+                type === "bpp"
+                  ? bppicon
+                  : type === "dpa"
+                  ? dpaicon
+                  : senatoricon
+              }
+              boxSize={{ lg: 150, xl: 300 }}
+            />
+          </Center>
+          <Text textAlign={"justify"} mt={10} fontWeight={400} fontSize={"lg"}>
+            {type === "bpp"
+              ? "Badan Pelaksana Program (BPP) adalah lembaga eksekutif tertinggi dalam KMPN ITB dan bertanggungjawab kepada DPA."
+              : type === "dpa"
+              ? "Dewan Perwakilan Anggota (DPA) adalah lembaga pemegang kedaulatan tertinggi dalam Keluarga Mahasiswa Teknik Penerbangan yang merupakan perwakilan dari seluruh anggota."
+              : "Kesenatoran merupakan sebuah tim yang dibentuk dengan tujuan membantu Senator dalam menjalankan fungsi penarikan aspirasi dan penyampaian keputusan yang dibuat oleh Kongres KM ITB kepada anggota KMPN."}
+          </Text>
+          <Spacer />
+          <Box
+            mt={10}
+            bg={"#2D83BA"}
+            fontSize={{ xl: "xl", "2xl": "2xl" }}
+            fontWeight={800}
+            textShadow={"0px 3.03586px 33.3945px rgba(58, 58, 60, 0.2)"}
+            letterSpacing={"0.1em"}
+            color={"#FFF"}
+            w={"75%"}
+            textAlign={"center"}
+            p={3}
+            boxShadow={"inset 0px 4.5px 4.5px rgba(0, 0, 0, 0.25)"}
+            borderRadius={50}
+          >
+            <Text>
+              {type === "bpp" ? "BPP" : type === "dpa" ? "DPA" : "KESENATORAN"}
+            </Text>
+          </Box>
+        </Flex>
+      </Show>
+      <Hide above="lg">
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          w={"90%"}
+          gap={10}
+        >
+          <Center
+            borderRadius={"full"}
+            bg={
+              "radial-gradient(100.07% 99.2% at 28.21% 11.53%, rgba(255, 255, 255, 0.65) 34.45%, rgba(255, 255, 255, 0.28) 62.42%, rgba(255, 255, 255, 0.14) 100%) "
+            }
+            boxShadow={
+              "-7.24229px 5.31101px 35.2458px rgba(40, 47, 78, 0.1), inset -4px 7px 17px rgba(0, 0, 0, 0.25)"
+            }
+            backdropFilter={"blur(4.34537px)"}
+          >
+            <Image
+              src={
+                type === "bpp"
+                  ? bppicon
+                  : type === "dpa"
+                  ? dpaicon
+                  : senatoricon
+              }
+              boxSize={{ sm: 150, md: 200 }}
+            />
+          </Center>
+          <Flex flexDir={"column-reverse"} w={"50%"}>
+            <Text
+              textAlign={"justify"}
+              mt={5}
+              fontWeight={400}
+              fontSize={{ sm: "md", md: "lg" }}
+            >
+              {type === "bpp"
+                ? "Badan Pelaksana Program (BPP) adalah lembaga eksekutif tertinggi dalam KMPN ITB dan bertanggungjawab kepada DPA."
+                : type === "dpa"
+                ? "Dewan Perwakilan Anggota (DPA) adalah lembaga pemegang kedaulatan tertinggi dalam Keluarga Mahasiswa Teknik Penerbangan yang merupakan perwakilan dari seluruh anggota."
+                : "Kesenatoran merupakan sebuah tim yang dibentuk dengan tujuan membantu Senator dalam menjalankan fungsi penarikan aspirasi dan penyampaian keputusan yang dibuat oleh Kongres KM ITB kepada anggota KMPN."}
+            </Text>
+            <Box
+              bg={"#2D83BA"}
+              fontSize={{ sm: "md", md: "xl" }}
+              fontWeight={800}
+              textShadow={"0px 3.03586px 33.3945px rgba(58, 58, 60, 0.2)"}
+              letterSpacing={"0.1em"}
+              color={"#FFF"}
+              w={"full"}
+              textAlign={"center"}
+              p={3}
+              boxShadow={"inset 0px 4.5px 4.5px rgba(0, 0, 0, 0.25)"}
+              borderRadius={50}
+            >
+              <Text>
+                {type === "bpp"
+                  ? "BPP"
+                  : type === "dpa"
+                  ? "DPA"
+                  : "KESENATORAN"}
+              </Text>
+            </Box>
+          </Flex>
+        </Flex>
+      </Hide>
+    </>
   );
 };
 
@@ -217,7 +304,7 @@ const CardCarousel = ({ alter, post }: { alter?: boolean; post: any }) => {
     <Flex
       flexDir={"column"}
       alignItems={"center"}
-      w={{ lg: "25vw", xl: "18vw" }}
+      w={{ sm: "60vw", md: "40vw", lg: "25vw", xl: "18vw" }}
       p={10}
       textAlign={"center"}
       bg={alter ? "#28668D" : "#2D83BA"}
@@ -227,7 +314,7 @@ const CardCarousel = ({ alter, post }: { alter?: boolean; post: any }) => {
       id={post.id}
     >
       <Text
-        fontSize={"xl"}
+        fontSize={{ sm: "lg", md: "xl" }}
         textTransform={"uppercase"}
         letterSpacing={"0.1em"}
         fontWeight={800}
@@ -236,7 +323,7 @@ const CardCarousel = ({ alter, post }: { alter?: boolean; post: any }) => {
         {post ? post.title.rendered : "lorem lorem terlorem lorem"}
       </Text>
       <Box
-        fontSize={"lg"}
+        fontSize={{ sm: "md", md: "lg" }}
         letterSpacing={"0.1em"}
         fontWeight={400}
         mb={5}
@@ -255,7 +342,7 @@ const CardCarousel = ({ alter, post }: { alter?: boolean; post: any }) => {
         boxShadow={"inset 0px 4px 4px rgba(0, 0, 0, 0.25)"}
       >
         <Text
-          fontSize={"lg"}
+          fontSize={{ sm: "md", md: "lg" }}
           letterSpacing={"0.1em"}
           fontWeight={400}
           cursor={"pointer"}
@@ -328,10 +415,10 @@ const Landing = () => {
           alignItems={"center"}
           w={"full"}
           pos={"absolute"}
-          top={480}
+          top={{ lg: 480, sm: 350 }}
         >
           <Flex
-            fontSize={"5xl"}
+            fontSize={{ base: "4xl", lg: "4xl", xl: "5xl", sm: "3xl" }}
             fontWeight={800}
             letterSpacing={"0.1em"}
             textShadow={"0px 2.80824px 30.8906px rgba(58, 58, 60, 0.2)"}
@@ -344,7 +431,7 @@ const Landing = () => {
             <Text>KELUARGA MAHASISWA</Text>
             <Text>TEKNIK PENERBANGAN</Text>
           </Flex>
-          <Image src={glider} boxSize={125} mb={5} />
+          <Image src={glider} boxSize={125} mb={5} mt={{ sm: 150, lg: 0 }} />
         </Flex>
       </Box>
 
@@ -357,7 +444,7 @@ const Landing = () => {
       >
         <Text
           fontWeight={800}
-          fontSize={"5xl"}
+          fontSize={{ sm: "4xl", lg: "4xl", xl: "5xl" }}
           letterSpacing={"0.1em"}
           color={"#3A3A3C"}
         >
@@ -366,17 +453,17 @@ const Landing = () => {
 
         <Flex
           flexDir={"column"}
-          w={"60%"}
+          w={{ sm: "80%", lg: "60%" }}
           bg={"#2D83BA"}
           boxShadow={"0px 4px 30px rgba(0, 0, 0, 0.25)"}
           borderRadius={50}
           mt={10}
-          px={20}
-          py={10}
+          px={{ sm: 10, lg: 20 }}
+          py={{ sm: 5, lg: 10 }}
         >
           <Text
             fontWeight={400}
-            fontSize={"2xl"}
+            fontSize={{ lg: "xl", xl: "2xl" }}
             lineHeight={"150%"}
             letterSpacing={"0.015em"}
             color={"#FFF"}
@@ -389,19 +476,29 @@ const Landing = () => {
           </Text>
         </Flex>
 
-        <Flex gap={20} mt={10}>
-          <Modal isOpen={isOpen} onClose={onClose} size={"4xl"} isCentered>
+        <Flex
+          gap={{ sm: 10, lg: 20 }}
+          mt={10}
+          flexDir={{ sm: "column", lg: "row" }}
+        >
+          <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            size={{ sm: "sm", md: "lg", lg: "4xl" }}
+            isCentered
+          >
             <ModalOverlay />
             <ModalAbout type={stateAbout} />
           </Modal>
 
-          <Box
+          <Flex
             textAlign={"center"}
             cursor={"pointer"}
             onClick={() => {
               onOpen();
               setAbout("sejarah");
             }}
+            flexDir={{ sm: "row", lg: "column" }}
           >
             <Flex
               boxSize={150}
@@ -412,18 +509,25 @@ const Landing = () => {
             >
               <Image src={sejarah} boxSize={100} />
             </Flex>
-            <Text fontWeight={600} fontSize={"3xl"} mt={5}>
-              Sejarah
-            </Text>
-          </Box>
+            <Center ml={{ sm: 10, lg: 0 }}>
+              <Text
+                fontWeight={600}
+                fontSize={{ sm: "2xl", md: "3xl", lg: "2xl", xl: "3xl" }}
+                mt={{ sm: 0, lg: 5 }}
+              >
+                Sejarah
+              </Text>
+            </Center>
+          </Flex>
 
-          <Box
+          <Flex
             textAlign={"center"}
             cursor={"pointer"}
             onClick={() => {
               onOpen();
               setAbout("tujuan");
             }}
+            flexDir={{ sm: "row", lg: "column" }}
           >
             <Flex
               boxSize={150}
@@ -434,18 +538,25 @@ const Landing = () => {
             >
               <Image src={tujuan} boxSize={100} />
             </Flex>
-            <Text fontWeight={600} fontSize={"3xl"} mt={5}>
-              Tujuan
-            </Text>
-          </Box>
+            <Center ml={{ sm: 10, lg: 0 }}>
+              <Text
+                fontWeight={600}
+                fontSize={{ sm: "2xl", md: "3xl", lg: "2xl", xl: "3xl" }}
+                mt={{ sm: 0, lg: 5 }}
+              >
+                Tujuan
+              </Text>
+            </Center>
+          </Flex>
 
-          <Box
+          <Flex
             textAlign={"center"}
             cursor={"pointer"}
             onClick={() => {
               onOpen();
               setAbout("nilai");
             }}
+            flexDir={{ sm: "row", lg: "column" }}
           >
             <Flex
               boxSize={150}
@@ -456,10 +567,16 @@ const Landing = () => {
             >
               <Image src={nilai} boxSize={100} />
             </Flex>
-            <Text fontWeight={600} fontSize={"3xl"} mt={5}>
-              Nilai
-            </Text>
-          </Box>
+            <Center ml={{ sm: 10, lg: 0 }}>
+              <Text
+                fontWeight={600}
+                fontSize={{ sm: "2xl", md: "3xl", lg: "2xl", xl: "3xl" }}
+                mt={{ sm: 0, lg: 5 }}
+              >
+                Nilai
+              </Text>
+            </Center>
+          </Flex>
         </Flex>
       </Flex>
 
@@ -480,14 +597,28 @@ const Landing = () => {
         />
         <Text
           fontWeight={800}
-          fontSize={"5xl"}
+          fontSize={{ sm: "3xl", md: "4xl", xl: "5xl" }}
           letterSpacing={"0.1em"}
           color={"#3A3A3C"}
+          textAlign={"center"}
         >
-          BADAN KELENGKAPAN ORGANISASI
+          BADAN KELENGKAPAN
+          {
+            <Hide above="md">
+              <br />
+            </Hide>
+          }{" "}
+          ORGANISASI
         </Text>
 
-        <Flex w={"80%"} justifyContent={"center"} gap={125} mt={10}>
+        <Flex
+          w={{ lg: "90%", xl: "80%" }}
+          justifyContent={"center"}
+          alignItems={{ sm: "center", lg: "normal" }}
+          gap={{ sm: 75, lg: 75, xl: 125 }}
+          mt={10}
+          flexDir={{ sm: "column", lg: "row" }}
+        >
           <CardBKO type="bpp" />
           <CardBKO type="kesenatoran" />
           <CardBKO type="dpa" />
@@ -508,19 +639,26 @@ const Landing = () => {
         >
           <Text
             fontWeight={800}
-            fontSize={"5xl"}
+            fontSize={{ sm: "3xl", md: "4xl", xl: "5xl" }}
             letterSpacing={"0.1em"}
             color={"#3A3A3C"}
             w={{ base: "100%", "2xl": "50%" }}
             textAlign={"center"}
           >
-            BERITA TERKINI DARI KMPN
+            BERITA TERKINI
+            {
+              <Hide above="md">
+                <br />
+              </Hide>
+            }{" "}
+            DARI KMPN
           </Text>
           <Divider
             border={"8px solid"}
             borderColor={"black"}
-            w={{ base: "70%", "2xl": "50%" }}
+            w={{ base: "70%", "2xl": "50%", lg: "45%" }}
             opacity={1}
+            display={{ sm: "none", md: "inherit" }}
           />
         </Flex>
 
@@ -536,7 +674,7 @@ const Landing = () => {
           overflow={"scroll"}
           ref={scrollRef}
         >
-          <Flex gap={20}>
+          <Flex gap={{ base: 20, sm: 10 }}>
             {allPost
               ? allPost.map((post, index) => {
                   if (index % 2 == 0) {
@@ -579,7 +717,7 @@ const Landing = () => {
             alignItems={"center"}
             justifyContent={"center"}
             cursor={"pointer"}
-            onClick={() => slide(-1500)}
+            onClick={() => slide(-0.8 * window.innerWidth)}
           >
             <Image src={leftdouble} boxSize={15} />
           </Flex>
@@ -592,7 +730,7 @@ const Landing = () => {
             alignItems={"center"}
             justifyContent={"center"}
             cursor={"pointer"}
-            onClick={() => slide(1500)}
+            onClick={() => slide(0.8 * window.innerWidth)}
           >
             <Image src={rightdouble} boxSize={15} />
           </Flex>
@@ -616,7 +754,8 @@ const Landing = () => {
           justifyContent={"center"}
           alignItems={"center"}
           w={"full"}
-          gap={20}
+          gap={{ sm: 10, lg: 20 }}
+          flexDir={{ sm: "column", lg: "row" }}
         >
           <Flex
             flexDir={"column"}
@@ -624,25 +763,30 @@ const Landing = () => {
             justifyContent={"center"}
             letterSpacing={"0.1em"}
             fontWeight={400}
-            fontSize={"2xl"}
+            fontSize={{ sm: "3xl", lg: "2xl" }}
           >
             <Text fontWeight={700}>Alamat Sekretariat</Text>
-            <Image boxSize={"xs"} src={maps} borderRadius={35} />
+            <Image
+              boxSize={{ base: "xs", lg: 250, sm: 200 }}
+              src={maps}
+              borderRadius={35}
+            />
           </Flex>
           <Flex
             flexDir={"column"}
-            fontSize={{ base: "3xl", xl: "5xl" }}
+            fontSize={{ base: "3xl", xl: "5xl", lg: "2xl" }}
             justifyContent={"center"}
             alignItems={"center"}
             border={"2px solid #FFFFFF"}
-            p={20}
+            p={{ base: 20, sm: 10 }}
             borderRadius={40}
+            textAlign={"center"}
           >
             <Text letterSpacing={"0.1em"} fontWeight={800}>
               SEND US A MESSAGE
             </Text>
             <MotionFlex
-              mt={10}
+              mt={{ sm: 5, md: 10 }}
               bg={"#1C5579"}
               boxShadow={
                 "0px 8.06091px 8.06091px rgba(0, 0, 0, 0.25), inset 6.04568px 8.06091px 8.06091px rgba(65, 64, 66, 0.25)"
@@ -657,7 +801,7 @@ const Landing = () => {
               transition={{ duration: 0.3 }}
             >
               <Text
-                fontSize={{ base: "2xl", xl: "4xl" }}
+                fontSize={{ base: "2xl", xl: "4xl", lg: "xl", sm: "xl" }}
                 fontWeight={600}
                 letterSpacing={"0.1em"}
               >
@@ -668,7 +812,7 @@ const Landing = () => {
         </Flex>
         <Box textAlign={"center"} w={"full"}>
           <MotionText
-            mt={20}
+            mt={{ sm: 10, lg: 20 }}
             fontWeight={700}
             fontSize={{ base: "2xl", xl: "3xl" }}
             letterSpacing={"0.1em"}
@@ -687,7 +831,10 @@ const Landing = () => {
         p={10}
         letterSpacing={"0.1em"}
         fontWeight={400}
-        fontSize={"xl"}
+        fontSize={{ base: "xl", lg: "lg" }}
+        flexDir={{ sm: "column", lg: "row" }}
+        gap={{ sm: 4, lg: 0 }}
+        alignItems={{ sm: "center", lg: "normal" }}
       >
         <Flex alignItems={"center"} gap={5}>
           <Image src={twitterblack} />
@@ -705,7 +852,11 @@ const Landing = () => {
           </MotionText>
         </Flex>
 
-        <Modal isOpen={isOpenBehind} onClose={onCloseBehind} size={"6xl"}>
+        <Modal
+          isOpen={isOpenBehind}
+          onClose={onCloseBehind}
+          size={{ sm: "sm", lg: "6xl" }}
+        >
           <ModalOverlay />
           <ModalContent
             bg={"#2980B9"}
@@ -715,83 +866,177 @@ const Landing = () => {
             borderRadius={50}
           >
             <ModalCloseButton size={"lg"} top={10} right={10} />
-            <Flex
-              flexDir={"column"}
-              justifyContent={"center"}
-              alignItems={"center"}
-            >
-              <Text fontSize={"2xl"} fontWeight={600} letterSpacing={"0.1em"}>
-                BEHIND THIS WEBSITE
-              </Text>
-              <Flex mt={10} gap={20}>
-                <Flex
-                  flexDir={"column"}
-                  borderRadius={50}
-                  bg={"#D9D9D9"}
-                  p={10}
-                  color={"#000"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
+            <Show above="lg">
+              <Flex
+                flexDir={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <Text
+                  textAlign={"center"}
                   fontSize={"2xl"}
                   fontWeight={600}
                   letterSpacing={"0.1em"}
-                  gap={10}
                 >
-                  <Text fontWeight={700}>POSISI</Text>
-                  <Box
-                    boxSize={150}
-                    border={"1px solid #000000"}
+                  BEHIND THIS WEBSITE
+                </Text>
+                <Flex mt={10} gap={20}>
+                  <Flex
+                    flexDir={"column"}
+                    borderRadius={50}
                     bg={"#D9D9D9"}
-                    borderRadius={"full"}
-                  />
-                  <Text>Nama</Text>
-                </Flex>
-                <Flex
-                  flexDir={"column"}
-                  borderRadius={50}
-                  bg={"#D9D9D9"}
-                  p={10}
-                  color={"#000"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  fontSize={"2xl"}
-                  fontWeight={600}
-                  letterSpacing={"0.1em"}
-                  gap={10}
-                >
-                  <Text fontWeight={700}>POSISI</Text>
-                  <Box
-                    boxSize={150}
-                    border={"1px solid #000000"}
+                    p={10}
+                    color={"#000"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"2xl"}
+                    fontWeight={600}
+                    letterSpacing={"0.1em"}
+                    gap={10}
+                  >
+                    <Text fontWeight={700}>POSISI</Text>
+                    <Box
+                      boxSize={150}
+                      border={"1px solid #000000"}
+                      bg={"#D9D9D9"}
+                      borderRadius={"full"}
+                    />
+                    <Text>Nama</Text>
+                  </Flex>
+                  <Flex
+                    flexDir={"column"}
+                    borderRadius={50}
                     bg={"#D9D9D9"}
-                    borderRadius={"full"}
-                  />
-                  <Text>Nama</Text>
-                </Flex>
-                <Flex
-                  flexDir={"column"}
-                  borderRadius={50}
-                  bg={"#D9D9D9"}
-                  p={10}
-                  color={"#000"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  fontSize={"2xl"}
-                  fontWeight={600}
-                  letterSpacing={"0.1em"}
-                  gap={10}
-                >
-                  <Text fontWeight={700}>POSISI</Text>
-                  <Box
-                    boxSize={150}
-                    border={"1px solid #000000"}
+                    p={10}
+                    color={"#000"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"2xl"}
+                    fontWeight={600}
+                    letterSpacing={"0.1em"}
+                    gap={10}
+                  >
+                    <Text fontWeight={700}>POSISI</Text>
+                    <Box
+                      boxSize={150}
+                      border={"1px solid #000000"}
+                      bg={"#D9D9D9"}
+                      borderRadius={"full"}
+                    />
+                    <Text>Nama</Text>
+                  </Flex>
+                  <Flex
+                    flexDir={"column"}
+                    borderRadius={50}
                     bg={"#D9D9D9"}
-                    borderRadius={"full"}
-                  />
-                  <Text>Nama</Text>
+                    p={10}
+                    color={"#000"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"2xl"}
+                    fontWeight={600}
+                    letterSpacing={"0.1em"}
+                    gap={10}
+                  >
+                    <Text fontWeight={700}>POSISI</Text>
+                    <Box
+                      boxSize={150}
+                      border={"1px solid #000000"}
+                      bg={"#D9D9D9"}
+                      borderRadius={"full"}
+                    />
+                    <Text>Nama</Text>
+                  </Flex>
                 </Flex>
               </Flex>
-            </Flex>
+            </Show>
+            <Hide above="lg">
+              <Flex
+                flexDir={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <Text
+                  textAlign={"center"}
+                  fontSize={"2xl"}
+                  fontWeight={600}
+                  letterSpacing={"0.1em"}
+                >
+                  BEHIND THIS WEBSITE
+                </Text>
+                <Flex mt={10} gap={5} flexDir={"column"}>
+                  <Flex
+                    borderRadius={50}
+                    bg={"#D9D9D9"}
+                    p={7}
+                    color={"#000"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"2xl"}
+                    fontWeight={600}
+                    letterSpacing={"0.1em"}
+                    gap={10}
+                  >
+                    <Box
+                      boxSize={75}
+                      border={"1px solid #000000"}
+                      bg={"#D9D9D9"}
+                      borderRadius={"full"}
+                    />
+                    <Flex flexDir={"column"}>
+                      <Text fontWeight={700}>POSISI</Text>
+                      <Text>Nama</Text>
+                    </Flex>
+                  </Flex>
+                  <Flex
+                    borderRadius={50}
+                    bg={"#D9D9D9"}
+                    p={7}
+                    color={"#000"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"2xl"}
+                    fontWeight={600}
+                    letterSpacing={"0.1em"}
+                    gap={10}
+                  >
+                    <Box
+                      boxSize={75}
+                      border={"1px solid #000000"}
+                      bg={"#D9D9D9"}
+                      borderRadius={"full"}
+                    />
+                    <Flex flexDir={"column"}>
+                      <Text fontWeight={700}>POSISI</Text>
+                      <Text>Nama</Text>
+                    </Flex>
+                  </Flex>
+                  <Flex
+                    borderRadius={50}
+                    bg={"#D9D9D9"}
+                    p={7}
+                    color={"#000"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"2xl"}
+                    fontWeight={600}
+                    letterSpacing={"0.1em"}
+                    gap={10}
+                  >
+                    <Box
+                      boxSize={75}
+                      border={"1px solid #000000"}
+                      bg={"#D9D9D9"}
+                      borderRadius={"full"}
+                    />
+                    <Flex flexDir={"column"}>
+                      <Text fontWeight={700}>POSISI</Text>
+                      <Text>Nama</Text>
+                    </Flex>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Hide>
           </ModalContent>
         </Modal>
       </Flex>

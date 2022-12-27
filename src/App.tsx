@@ -4,6 +4,7 @@ import AllRoutes from "./AllRoutes";
 import { WPProvider } from "./provider/Provider";
 import theme from "./theme";
 import Sidebar from "./components/Sidebar";
+import { useState, useEffect } from "react";
 
 function App() {
   return (
