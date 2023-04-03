@@ -21,6 +21,7 @@ import {
   FormLabel,
   Show,
   Hide,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { useEffect, useState, useRef, useContext } from "react";
 
@@ -32,10 +33,10 @@ import header4 from "../asset/header/4.png";
 import bgfoot from "../asset/bgfoot.svg";
 import maps from "../asset/maps.svg";
 
-import nilai from "../asset/nilai.svg";
+import sifat from "../asset/nilai.svg";
 import sejarah from "../asset/sejarah.svg";
 import tujuan from "../asset/tujuan.svg";
-import nilaiwhite from "../asset/nilaiwhite.svg";
+import sifatwhite from "../asset/nilaiwhite.svg";
 import sejarahwhite from "../asset/sejarahwhite.svg";
 import tujuanwhite from "../asset/tujuanwhite.svg";
 
@@ -57,6 +58,14 @@ import igblack from "../asset/igblack.svg";
 import linkedinblack from "../asset/linkedinblack.svg";
 import twitterblack from "../asset/twitterblack.svg";
 
+import leftArrow from "../asset/leftArrow.svg";
+import rightArrow from "../asset/rightArrow.svg";
+
+import bagas from "../asset/behindWeb/bagas.png";
+import elsa from "../asset/behindWeb/elsa.png";
+import adil from "../asset/behindWeb/adil.png";
+import aping from "../asset/behindWeb/aping.png";
+
 import data from "../dummydata";
 
 import useDraggableScroll from "use-draggable-scroll";
@@ -72,14 +81,43 @@ const MotionBox = motion(Box);
 const MotionText = motion(Text);
 const MotionFlex = motion(Flex);
 
-const ModalAbout = ({ type }: { type: string }) => {
+const ModalAbout = ({
+  type,
+  handlePageBefore,
+  handlePageAfter,
+  currPage,
+}: {
+  type: string;
+  handlePageBefore: any;
+  handlePageAfter: any;
+  currPage: any;
+}) => {
+  const FlexSifat = ({ content }: { content: string }) => {
+    return (
+      <Flex
+        bg={" #E6E7E8"}
+        boxShadow={"inset 0px 8.94118px 8.94118px rgba(0, 0, 0, 0.25)"}
+        borderRadius={"full"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        px={9}
+        py={2}
+        w={350}
+        h={70}
+        textAlign={"center"}
+      >
+        {content}
+      </Flex>
+    );
+  };
+
   return (
     <ModalContent
       bg={"#2D83BA"}
       color={"white"}
       borderRadius={30}
       p={7}
-      h={{ sm: "2xl", md: "3xl", lg: "lg" }}
+      h={{ sm: "2xl", md: "xl", lg: "lg" }}
       boxShadow={"inset 11px 11px 30px 5px rgba(0, 0, 0, 0.25)"}
     >
       <ModalHeader>
@@ -95,7 +133,7 @@ const ModalAbout = ({ type }: { type: string }) => {
                 ? sejarahwhite
                 : type === "tujuan"
                 ? tujuanwhite
-                : nilaiwhite
+                : sifatwhite
             }
             boxSize={{ sm: 40, lg: 20 }}
           />
@@ -104,7 +142,7 @@ const ModalAbout = ({ type }: { type: string }) => {
               ? "Sejarah"
               : type === "tujuan"
               ? "Tujuan"
-              : "Nilai"}
+              : "5 Sifat KMPN"}
           </Text>
         </Flex>
       </ModalHeader>
@@ -118,58 +156,163 @@ const ModalAbout = ({ type }: { type: string }) => {
           p={{ sm: 3, md: 10 }}
         >
           {type === "sejarah" ? (
-            <Text
-              fontSize={{ sm: "lg", md: "xl", lg: "2xl" }}
-              textAlign={"center"}
-            >
-              KMPN ITB berdiri pada tanggal 6 Agustus 1997 dengan menjunjung
-              tinggi Pancasila
-            </Text>
-          ) : type === "tujuan" ? (
-            <OrderedList
-              fontSize={{ sm: "md", md: "lg", lg: "2xl" }}
-              textAlign={"justify"}
-            >
-              <ListItem>
-                Mendukung berlangsungnya proses pendidikan di Program Studi
-                Teknik Dirgantara Institut Teknologi Bandung,
-              </ListItem>
-              <ListItem>
-                Menyediakan wadah untuk menampung aspirasi Mahasiswa Teknik
-                Dirgantara Institut Teknologi Bandung melalui asas kekeluargaan,
-              </ListItem>
-              <ListItem>
-                KMPN ITB juga berusaha mengembangkan anggotanya dalam
-                menyalurkan karya cipta, tenaga, dan pikiran dalam rangka
-                pembangunan Negara Indonesia, khususnya dalam bidang
-                kedirgantaraan.
-              </ListItem>
-            </OrderedList>
-          ) : (
-            <Flex flexDir={"column"}>
+            currPage === 0 ? (
               <Text
-                fontSize={"3xl"}
-                textAlign={"center"}
-                fontWeight={600}
-                mb={2}
-              >
-                5 NILAI KMPN
-              </Text>
-
-              <OrderedList
                 fontSize={{ sm: "lg", md: "xl", lg: "2xl" }}
                 textAlign={"justify"}
               >
-                <ListItem>Kebersamaan dalam kekeluargaan,</ListItem>
-                <ListItem>Demokratis,</ListItem>
-                <ListItem>Kemahasiswaan yang profesional,</ListItem>
-                <ListItem>Progresif, dan</ListItem>
-                <ListItem>Saling menghormati dengan pihak luar.</ListItem>
+                Keluarga Mahasiswa Teknik Penerbangan (KMPN) berdiri pada
+                tanggal
+                <span style={{ color: "#1C5579" }}> 6 Agustus 1997</span>,
+                bersamaan dengan berdirinya Jurusan Teknik Penerbangan, yang
+                sebelumnya merupakan pilihan dalam Departemen Teknik Mesin.
+                Dengan perkembangan Industri Kedirgantaraan pada tahun 1980-an,
+                program ini akhirnya dipisahkan dari Teknik Mesin pada tahun
+                1997.
+              </Text>
+            ) : (
+              <Text
+                fontSize={{ sm: "lg", md: "xl", lg: "2xl" }}
+                textAlign={"justify"}
+              >
+                KMPN didirikan karena beberapa alasan, namun salah satu faktor
+                kritisnya adalah karakter mahasiswa Aeronautika yang berbeda,
+                antara lain{" "}
+                <span style={{ color: "#1C5579" }}>
+                  fleksibilitas, fokus pada detail, progresivitas, dan
+                  kecenderungan kuat untuk merangkul satu sama lain
+                </span>
+                . Inilah mengapa istilah{" "}
+                <span
+                  style={{
+                    color: "#1C5579",
+                    fontWeight: "bold",
+                    fontStyle: "italic",
+                  }}
+                >
+                  "Keluarga"
+                </span>{" "}
+                dipilih untuk nama organisasi agar menandakan keinginan untuk
+                menciptakan lingkungan yang mengasuh dan mendukung setiap
+                anggota untuk beristirahat, tumbuh, dan berkembang sebagai
+                sebuah keluarga.
+              </Text>
+            )
+          ) : type === "tujuan" ? (
+            currPage === 0 ? (
+              <OrderedList
+                fontSize={{ sm: "md", md: "lg", lg: "2xl" }}
+                textAlign={"justify"}
+              >
+                <ListItem>
+                  Mendukung berlangsungnya proses pendidikan di Program Studi
+                  Teknik Dirgantara Institut Teknologi Bandung,
+                </ListItem>
+                <ListItem>
+                  Menyediakan wadah untuk menampung aspirasi Mahasiswa Teknik
+                  Dirgantara Institut Teknologi Bandung melalui asas
+                  kekeluargaan,
+                </ListItem>
+                <ListItem>
+                  KMPN ITB juga berusaha mengembangkan anggotanya dalam
+                  menyalurkan karya cipta, tenaga, dan pikiran dalam rangka
+                  pembangunan Negara Indonesia, khususnya dalam bidang
+                  kedirgantaraan.
+                </ListItem>
               </OrderedList>
+            ) : (
+              <OrderedList
+                fontSize={{ sm: "md", md: "lg", lg: "2xl" }}
+                textAlign={"justify"}
+                start={4}
+              >
+                <ListItem>
+                  Membimbing dan menyalurkan karya cipta, tenaga, dan pikiran
+                  anggota Keluarga Mahasiswa Teknik Penerbangan dalam rangka
+                  pembangunan Republik Indonesia demi tercapainya kesejahteraan
+                  masyarakat.
+                </ListItem>
+                <ListItem>
+                  Mengembangkan rasa kekeluargaan antara Keluarga Mahasiswa
+                  Teknik Penerbangan dengan pihak lain di luar Keluarga
+                  Mahasiswa Teknik Penerbangan.
+                </ListItem>
+              </OrderedList>
+            )
+          ) : (
+            <Flex
+              flexDir={"column"}
+              color="#1C5579"
+              fontWeight={"bold"}
+              fontSize={"lg"}
+              gap={10}
+              alignItems={"center"}
+            >
+              <Flex gap={100}>
+                <FlexSifat content="Kebersamaan dalam kekeluargaan"></FlexSifat>
+                <FlexSifat content="Kemahasiswaan yang profesional"></FlexSifat>
+              </Flex>
+              <Flex gap={100}>
+                <FlexSifat content="Progresif"></FlexSifat>
+                <FlexSifat content="Demokratis"></FlexSifat>
+              </Flex>
+              <Flex>
+                <FlexSifat content="Saling menghormati dengan pihak luar"></FlexSifat>
+              </Flex>
             </Flex>
           )}
         </Flex>
       </ModalBody>
+      <ModalFooter justifyContent={"center"}>
+        {type !== "sifat" ? (
+          <Flex gap={5} alignItems={"center"}>
+            <Flex
+              bg={" #E6E7E8"}
+              boxShadow={"inset 0px 8.94118px 8.94118px rgba(0, 0, 0, 0.25)"}
+              boxSize={45}
+              borderRadius={"full"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              cursor={"pointer"}
+              onClick={handlePageBefore}
+            >
+              <Image src={leftArrow} boxSize={5} />
+            </Flex>
+
+            <Box
+              bg={currPage === 0 ? "#1C5579" : "#E6E7E8"}
+              boxShadow={"inset 0px 8.94118px 8.94118px rgba(0, 0, 0, 0.25)"}
+              boxSize={15}
+              borderRadius={"full"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              cursor={"pointer"}
+            />
+            <Box
+              bg={currPage === 1 ? "#1C5579" : "#E6E7E8"}
+              boxShadow={"inset 0px 8.94118px 8.94118px rgba(0, 0, 0, 0.25)"}
+              boxSize={15}
+              borderRadius={"full"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              cursor={"pointer"}
+            />
+
+            <Flex
+              bg={" #E6E7E8"}
+              boxShadow={"inset 0px 8.94118px 8.94118px rgba(0, 0, 0, 0.25)"}
+              boxSize={45}
+              borderRadius={"full"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              cursor={"pointer"}
+              onClick={handlePageAfter}
+            >
+              <Image src={rightArrow} boxSize={5} />
+            </Flex>
+          </Flex>
+        ) : null}
+      </ModalFooter>
     </ModalContent>
   );
 };
@@ -368,6 +511,10 @@ const Landing = () => {
   } = useDisclosure();
   const [stateAbout, setAbout] = useState("");
 
+  const [statePage, setPage] = useState(0);
+  const handlePageBefore = () => setPage(0);
+  const handlePageAfter = () => setPage(1);
+
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const slide = (shift: number) => {
@@ -484,11 +631,16 @@ const Landing = () => {
           <Modal
             isOpen={isOpen}
             onClose={onClose}
-            size={{ sm: "sm", md: "lg", lg: "4xl" }}
+            size={{ sm: "sm", md: "lg", lg: "6xl" }}
             isCentered
           >
             <ModalOverlay />
-            <ModalAbout type={stateAbout} />
+            <ModalAbout
+              type={stateAbout}
+              currPage={statePage}
+              handlePageAfter={handlePageAfter}
+              handlePageBefore={handlePageBefore}
+            />
           </Modal>
 
           <Flex
@@ -554,7 +706,7 @@ const Landing = () => {
             cursor={"pointer"}
             onClick={() => {
               onOpen();
-              setAbout("nilai");
+              setAbout("sifat");
             }}
             flexDir={{ sm: "row", lg: "column" }}
           >
@@ -565,7 +717,7 @@ const Landing = () => {
               justifyContent={"center"}
               alignItems={"center"}
             >
-              <Image src={nilai} boxSize={100} />
+              <Image src={sifat} boxSize={100} />
             </Flex>
             <Center ml={{ sm: 10, lg: 0 }}>
               <Text
@@ -573,7 +725,7 @@ const Landing = () => {
                 fontSize={{ sm: "2xl", md: "3xl", lg: "2xl", xl: "3xl" }}
                 mt={{ sm: 0, lg: 5 }}
               >
-                Nilai
+                Sifat
               </Text>
             </Center>
           </Flex>
@@ -880,7 +1032,7 @@ const Landing = () => {
                 >
                   BEHIND THIS WEBSITE
                 </Text>
-                <Flex mt={10} gap={20}>
+                <Flex mt={10} gap={15}>
                   <Flex
                     flexDir={"column"}
                     borderRadius={50}
@@ -893,15 +1045,13 @@ const Landing = () => {
                     fontWeight={600}
                     letterSpacing={"0.1em"}
                     gap={10}
+                    textAlign={"center"}
                   >
-                    <Text fontWeight={700}>POSISI</Text>
-                    <Box
-                      boxSize={150}
-                      border={"1px solid #000000"}
-                      bg={"#D9D9D9"}
-                      borderRadius={"full"}
-                    />
-                    <Text>Nama</Text>
+                    <Text fontWeight={700}>UI/UX DESIGNER</Text>
+                    <Image src={elsa} boxSize={150} />
+                    <Text fontWeight={600}>
+                      Elsa <br /> <span style={{ fontWeight: 400 }}>AE'19</span>
+                    </Text>
                   </Flex>
                   <Flex
                     flexDir={"column"}
@@ -915,15 +1065,14 @@ const Landing = () => {
                     fontWeight={600}
                     letterSpacing={"0.1em"}
                     gap={10}
+                    textAlign={"center"}
                   >
-                    <Text fontWeight={700}>POSISI</Text>
-                    <Box
-                      boxSize={150}
-                      border={"1px solid #000000"}
-                      bg={"#D9D9D9"}
-                      borderRadius={"full"}
-                    />
-                    <Text>Nama</Text>
+                    <Text fontWeight={700}>WEBSITE DEVELOPER</Text>
+                    <Image src={bagas} boxSize={150} />
+                    <Text fontWeight={600}>
+                      Bagas <br />{" "}
+                      <span style={{ fontWeight: 400 }}>AE'20</span>
+                    </Text>
                   </Flex>
                   <Flex
                     flexDir={"column"}
@@ -937,15 +1086,35 @@ const Landing = () => {
                     fontWeight={600}
                     letterSpacing={"0.1em"}
                     gap={10}
+                    textAlign={"center"}
                   >
-                    <Text fontWeight={700}>POSISI</Text>
-                    <Box
-                      boxSize={150}
-                      border={"1px solid #000000"}
-                      bg={"#D9D9D9"}
-                      borderRadius={"full"}
-                    />
-                    <Text>Nama</Text>
+                    <Text fontWeight={700}>UI/UX DESIGNER</Text>
+                    <Image src={aping} boxSize={150} />
+                    <Text fontWeight={600}>
+                      Aping <br />{" "}
+                      <span style={{ fontWeight: 400 }}>AE'20</span>
+                    </Text>
+                  </Flex>
+                  <Flex
+                    flexDir={"column"}
+                    borderRadius={50}
+                    bg={"#D9D9D9"}
+                    p={10}
+                    color={"#000"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"2xl"}
+                    fontWeight={600}
+                    letterSpacing={"0.1em"}
+                    gap={10}
+                    textAlign={"center"}
+                  >
+                    <Text fontWeight={700}>UI/UX DESIGNER</Text>
+                    <Image src={adil} boxSize={150} />
+                    <Text fontWeight={600}>
+                      Adillah <br />{" "}
+                      <span style={{ fontWeight: 400 }}>AE'21</span>
+                    </Text>
                   </Flex>
                 </Flex>
               </Flex>
@@ -965,6 +1134,29 @@ const Landing = () => {
                   BEHIND THIS WEBSITE
                 </Text>
                 <Flex mt={10} gap={5} flexDir={"column"}>
+                  <Flex
+                    borderRadius={50}
+                    bg={"#D9D9D9"}
+                    p={7}
+                    color={"#000"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    fontSize={"2xl"}
+                    fontWeight={600}
+                    letterSpacing={"0.1em"}
+                    gap={10}
+                  >
+                    <Box
+                      boxSize={75}
+                      border={"1px solid #000000"}
+                      bg={"#D9D9D9"}
+                      borderRadius={"full"}
+                    />
+                    <Flex flexDir={"column"}>
+                      <Text fontWeight={700}>POSISI</Text>
+                      <Text>Nama</Text>
+                    </Flex>
+                  </Flex>
                   <Flex
                     borderRadius={50}
                     bg={"#D9D9D9"}
