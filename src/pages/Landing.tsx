@@ -54,17 +54,8 @@ import location from "../asset/location.svg";
 import leftdouble from "../asset/leftdouble.svg";
 import rightdouble from "../asset/rightdouble.svg";
 
-import igblack from "../asset/igblack.svg";
-import linkedinblack from "../asset/linkedinblack.svg";
-import twitterblack from "../asset/twitterblack.svg";
-
 import leftArrow from "../asset/leftArrow.svg";
 import rightArrow from "../asset/rightArrow.svg";
-
-import bagas from "../asset/behindWeb/bagas.png";
-import elsa from "../asset/behindWeb/elsa.png";
-import adil from "../asset/behindWeb/adil.png";
-import aping from "../asset/behindWeb/aping.png";
 
 import data from "../dummydata";
 
@@ -76,6 +67,7 @@ import axios from "axios";
 import parse from "html-react-parser";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import Footer from "../components/Footer";
 
 const MotionBox = motion(Box);
 const MotionText = motion(Text);
@@ -922,6 +914,10 @@ const Landing = () => {
               boxSize={{ base: "xs", lg: 250, sm: 200 }}
               src={maps}
               borderRadius={35}
+              cursor="pointer"
+              onClick={() =>
+                window.open("https://goo.gl/maps/cgSq99TNisnfTkm29", "_blank")
+              }
             />
           </Flex>
           <Flex
@@ -956,6 +952,10 @@ const Landing = () => {
                 fontSize={{ base: "2xl", xl: "4xl", lg: "xl", sm: "xl" }}
                 fontWeight={600}
                 letterSpacing={"0.1em"}
+                cursor="pointer"
+                onClick={() =>
+                  window.open("https://ig.me/m/kmpn_itb", "_blank")
+                }
               >
                 Here!
               </Text>
@@ -978,7 +978,9 @@ const Landing = () => {
         </Box>
       </Flex>
 
-      <Flex
+      <Footer />
+
+      {/* <Flex
         w={"full"}
         p={10}
         letterSpacing={"0.1em"}
@@ -989,9 +991,30 @@ const Landing = () => {
         alignItems={{ sm: "center", lg: "normal" }}
       >
         <Flex alignItems={"center"} gap={5}>
-          <Image src={twitterblack} />
-          <Image src={linkedinblack} />
-          <Image src={igblack} />
+          <Image
+            src={twitterblack}
+            onClick={() =>
+              window.open("https://twitter.com/KMPN_ITB", "_blank")
+            }
+            cursor="pointer"
+          />
+          <Image
+            src={linkedinblack}
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/company/keluarga-mahasiswa-teknik-penerbangan-itb/mycompany/",
+                "_blank"
+              )
+            }
+            cursor="pointer"
+          />
+          <Image
+            src={igblack}
+            onClick={() =>
+              window.open("https://www.instagram.com/kmpn_itb/", "_blank")
+            }
+            cursor="pointer"
+          />
           <Text>FOLLOW US!</Text>
         </Flex>
         <Spacer />
@@ -1231,7 +1254,7 @@ const Landing = () => {
             </Hide>
           </ModalContent>
         </Modal>
-      </Flex>
+      </Flex> */}
     </Box>
   );
 };
