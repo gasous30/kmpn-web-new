@@ -16,6 +16,9 @@ import {
 import igblack from "../asset/igblack.svg";
 import linkedinblack from "../asset/linkedinblack.svg";
 import twitterblack from "../asset/twitterblack.svg";
+import igwhite from "../asset/igwhite.svg";
+import linkedinwhite from "../asset/linkedinwhite.svg";
+import twitterwhite from "../asset/twitterwhite.svg";
 
 import bagas from "../asset/behindWeb/bagas.png";
 import elsa from "../asset/behindWeb/elsa.png";
@@ -28,7 +31,7 @@ const MotionBox = motion(Box);
 const MotionText = motion(Text);
 const MotionFlex = motion(Flex);
 
-const Footer = () => {
+const Footer = ({ senator }: { senator?: boolean }) => {
   const {
     isOpen: isOpenBehind,
     onOpen: onOpenBehind,
@@ -37,6 +40,8 @@ const Footer = () => {
 
   return (
     <Flex
+      bgColor={senator ? "#2980B9" : "transparent"}
+      color={senator ? "#E6E7E8" : "inherit"}
       w={"full"}
       p={10}
       letterSpacing={"0.1em"}
@@ -48,12 +53,12 @@ const Footer = () => {
     >
       <Flex alignItems={"center"} gap={5}>
         <Image
-          src={twitterblack}
+          src={senator ? twitterwhite : twitterblack}
           onClick={() => window.open("https://twitter.com/KMPN_ITB", "_blank")}
           cursor="pointer"
         />
         <Image
-          src={linkedinblack}
+          src={senator ? linkedinwhite : linkedinblack}
           onClick={() =>
             window.open(
               "https://www.linkedin.com/company/keluarga-mahasiswa-teknik-penerbangan-itb/mycompany/",
@@ -63,7 +68,7 @@ const Footer = () => {
           cursor="pointer"
         />
         <Image
-          src={igblack}
+          src={senator ? igwhite : igblack}
           onClick={() =>
             window.open("https://www.instagram.com/kmpn_itb/", "_blank")
           }

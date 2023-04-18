@@ -580,6 +580,7 @@ const Landing = () => {
         alignItems={"center"}
         mt={10}
         // h={"100vh"}
+        id={"about"}
       >
         <Text
           fontWeight={800}
@@ -944,6 +945,8 @@ const Landing = () => {
               py={2}
               w={"40%"}
               borderRadius={50}
+              cursor="pointer"
+              onClick={() => window.open("https://ig.me/m/kmpn_itb", "_blank")}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
@@ -952,10 +955,6 @@ const Landing = () => {
                 fontSize={{ base: "2xl", xl: "4xl", lg: "xl", sm: "xl" }}
                 fontWeight={600}
                 letterSpacing={"0.1em"}
-                cursor="pointer"
-                onClick={() =>
-                  window.open("https://ig.me/m/kmpn_itb", "_blank")
-                }
               >
                 Here!
               </Text>
