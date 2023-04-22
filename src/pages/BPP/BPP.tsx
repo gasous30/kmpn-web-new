@@ -30,14 +30,19 @@ import rightArrow from "../../asset/rightArrow.svg";
 
 import dokum_photo from "./dokum_photo";
 
+import kudticon from "../../asset/kudt_icon.png";
+import aisicon from "../../asset/AIS.png";
+import roadmapicon from "../../asset/Roadmap.png";
+
 import stakeholder_data from "./stakeholder_data";
 import Footer from "../../components/Footer";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Stakeholder = ({
   data_input,
 }: {
-  data_input: { title: string; name: string }[];
+  data_input: { title: string; name: string; img: any }[];
 }) => {
   const chunksize = 4;
   let sh_edited: any = [];
@@ -54,7 +59,8 @@ const Stakeholder = ({
               return (
                 <>
                   <Flex flexDir={"column"}>
-                    <Box boxSize={300} bgColor={"white"}></Box>
+                    <Image src={el.img} w={300} />
+                    {/* <Box boxSize={300} bgColor={"white"}></Box> */}
                     <Text
                       color={"white"}
                       fontWeight={800}
@@ -88,6 +94,20 @@ const Stakeholder = ({
 const BPP = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [stateModal, setStateModal] = useState("");
+  const [stateDok, setStateDok] = useState(0);
+  const nav = useNavigate();
+
+  const shuffleArray = (array: any) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  };
+
+  const dokum_photo_s = shuffleArray(dokum_photo);
 
   const ModalCont = ({ type }: { type: string }) => {
     const BodyVisi = () => {
@@ -539,7 +559,7 @@ const BPP = () => {
         </Text>
         <Flex px={250} py={20}>
           <Flex flexDir={"column"}>
-            <Box mb={10} boxSize={350} bgColor={"#d9d9d9"} />
+            <Image src={aisicon} w={350} />
             <Flex
               px={20}
               py={1}
@@ -550,6 +570,9 @@ const BPP = () => {
               _hover={{
                 bgColor: "#28668D",
               }}
+              onClick={() =>
+                window.open("https://www.instagram.com/ais.itb/", "_blank")
+              }
             >
               <Text
                 textAlign={"center"}
@@ -559,9 +582,6 @@ const BPP = () => {
                 textShadow={"0px 7.53608px 82.8969px rgba(58, 58, 60, 0.2)"}
                 letterSpacing={"0.1em"}
                 w={"full"}
-                onClick={() =>
-                  window.open("https://www.instagram.com/ais.itb/", "_blank")
-                }
               >
                 AIS
               </Text>
@@ -569,7 +589,7 @@ const BPP = () => {
           </Flex>
           <Spacer />
           <Flex flexDir={"column"}>
-            <Box mb={10} boxSize={350} bgColor={"#d9d9d9"} />
+            <Image src={kudticon} w={350} />
             <Flex
               px={20}
               py={1}
@@ -580,6 +600,7 @@ const BPP = () => {
               _hover={{
                 bgColor: "#28668D",
               }}
+              onClick={() => nav("/kudt")}
             >
               <Text
                 textAlign={"center"}
@@ -596,7 +617,7 @@ const BPP = () => {
           </Flex>
           <Spacer />
           <Flex flexDir={"column"}>
-            <Box mb={10} boxSize={350} bgColor={"#d9d9d9"} />
+            <Image src={roadmapicon} w={350} />
             <Flex
               px={20}
               py={1}
@@ -607,6 +628,10 @@ const BPP = () => {
               _hover={{
                 bgColor: "#28668D",
               }}
+              onClick={() => {
+                onOpen();
+                setStateModal("roadmap");
+              }}
             >
               <Text
                 textAlign={"center"}
@@ -616,10 +641,6 @@ const BPP = () => {
                 textShadow={"0px 7.53608px 82.8969px rgba(58, 58, 60, 0.2)"}
                 letterSpacing={"0.1em"}
                 w={"full"}
-                onClick={() => {
-                  onOpen();
-                  setStateModal("roadmap");
-                }}
               >
                 ROADMAP
               </Text>
@@ -644,13 +665,17 @@ const BPP = () => {
             borderRadius={"full"}
             alignItems={"center"}
             justifyContent={"center"}
+            cursor={"pointer"}
+            onClick={() =>
+              stateDok < 1 ? setStateDok(0) : setStateDok(stateDok - 2)
+            }
           >
             <Image src={leftArrowDouble} boxSize={5} />
           </Flex>
           <Spacer />
           <Flex gap={100}>
-            <Image boxSize={400} src={dokum_photo[0] as string} />
-            <Image boxSize={400} src={dokum_photo[1] as string} />
+            <Image boxSize={400} src={dokum_photo_s[stateDok] as string} />
+            <Image boxSize={400} src={dokum_photo_s[stateDok + 1] as string} />
           </Flex>
           <Spacer />
           <Flex
@@ -660,6 +685,12 @@ const BPP = () => {
             borderRadius={"full"}
             alignItems={"center"}
             justifyContent={"center"}
+            cursor={"pointer"}
+            onClick={() =>
+              stateDok > dokum_photo_s.length - 3
+                ? setStateDok(dokum_photo_s.length - 2)
+                : setStateDok(stateDok + 2)
+            }
           >
             <Image src={rightArrowDouble} boxSize={5} />
           </Flex>

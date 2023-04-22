@@ -1,7 +1,13 @@
-import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Text, Image } from "@chakra-ui/react";
 
 import bg from "../../asset/bg/senator.png";
 import Footer from "../../components/Footer";
+
+import maul from "../../asset/senator_team/maul.png";
+import melvin from "../../asset/senator_team/melvin.png";
+import yusak from "../../asset/senator_team/yusak.png";
+import nahda from "../../asset/senator_team/nahda.png";
+import faiq from "../../asset/senator_team/faiq.png";
 
 const Senator = () => {
   return (
@@ -85,7 +91,7 @@ const Senator = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
               >
-                <Box boxSize={80} bgColor={"#28668D"} mb={5} />
+                <Image src={maul} w={80} />
                 <Text
                   letterSpacing={"0.05em"}
                   color={"#1C5579"}
@@ -108,7 +114,7 @@ const Senator = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
               >
-                <Box boxSize={80} bgColor={"#28668D"} mb={5} />
+                <Image src={melvin} w={80} />
                 <Text
                   letterSpacing={"0.05em"}
                   color={"#1C5579"}
@@ -131,7 +137,7 @@ const Senator = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
               >
-                <Box boxSize={80} bgColor={"#28668D"} mb={5} />
+                <Image src={yusak} w={80} />
                 <Text
                   letterSpacing={"0.05em"}
                   color={"#1C5579"}
@@ -156,14 +162,14 @@ const Senator = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
               >
-                <Box boxSize={80} bgColor={"#28668D"} mb={5} />
+                <Image src={nahda} w={80} />
                 <Text
                   letterSpacing={"0.05em"}
                   color={"#1C5579"}
                   fontSize={"xl"}
                   fontWeight={600}
                 >
-                  Maulana Hayu J.
+                  Nahda Tiara H.
                 </Text>
                 <Text
                   letterSpacing={"0.05em"}
@@ -171,7 +177,7 @@ const Senator = () => {
                   fontSize={"xl"}
                   fontWeight={200}
                 >
-                  Senator
+                  Divisi Media & Konten
                 </Text>
               </Flex>
               <Flex
@@ -179,14 +185,14 @@ const Senator = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
               >
-                <Box boxSize={80} bgColor={"#28668D"} mb={5} />
+                <Image src={faiq} w={80} />
                 <Text
                   letterSpacing={"0.05em"}
                   color={"#1C5579"}
                   fontSize={"xl"}
                   fontWeight={600}
                 >
-                  Melvin Natalius C.
+                  Faiq M. Arif
                 </Text>
                 <Text
                   letterSpacing={"0.05em"}
@@ -194,7 +200,7 @@ const Senator = () => {
                   fontSize={"xl"}
                   fontWeight={200}
                 >
-                  Wakil Senator
+                  Divisi Media & Konten
                 </Text>
               </Flex>
             </Flex>
@@ -247,6 +253,7 @@ const Senator = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
                 cursor={"pointer"}
+                role={"group"}
                 onClick={() =>
                   window.open(
                     "https://drive.google.com/drive/folders/1CatQ578ivVqHyJqXXMdbyRC_Go2Zf6BF",
@@ -265,12 +272,13 @@ const Senator = () => {
                   borderRadius={30}
                   justifyContent={"center"}
                   alignItems={"center"}
+                  _groupHover={{ bgColor: "#1C5579" }}
                 >
                   <Text
                     color={"#1C5579"}
                     fontSize={"4xl"}
                     fontWeight={600}
-                    _hover={{ textColor: "#0A66C2" }}
+                    _groupHover={{ textColor: "#E6E7E8" }}
                   >
                     Click Here
                   </Text>
@@ -297,6 +305,7 @@ const Senator = () => {
                 justifyContent={"center"}
                 alignItems={"center"}
                 cursor={"pointer"}
+                role={"group"}
                 onClick={() =>
                   window.open(
                     "https://drive.google.com/drive/folders/1AweBAcYN8sHr13bXRhDeMkftsIVTAfft",
@@ -315,12 +324,13 @@ const Senator = () => {
                   borderRadius={30}
                   justifyContent={"center"}
                   alignItems={"center"}
+                  _groupHover={{ bgColor: "#1C5579" }}
                 >
                   <Text
                     color={"#1C5579"}
                     fontSize={"4xl"}
                     fontWeight={600}
-                    _hover={{ textColor: "#0A66C2" }}
+                    _groupHover={{ textColor: "#E6E7E8" }}
                   >
                     Click Here
                   </Text>

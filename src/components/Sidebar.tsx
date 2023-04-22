@@ -300,7 +300,7 @@ const Sidebar = () => {
                     About
                   </Text>
                 </HStack>
-                <HStack
+                {/* <HStack
                   alignItems={"center"}
                   px={4}
                   py={1}
@@ -322,7 +322,7 @@ const Sidebar = () => {
                   >
                     DPA
                   </Text>
-                </HStack>
+                </HStack> */}
                 <HStack
                   alignItems={"center"}
                   px={4}

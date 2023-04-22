@@ -34,9 +34,13 @@ import rightArrowDouble from "../../asset/rightdouble.svg";
 import kudt_journey from "../../asset/kudt_journey_elem.png";
 import Footer from "../../components/Footer";
 
+import dokum_data from "./dokum_kudt";
+
 const KUDT = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [stateModal, setStateModal] = useState("");
+  const [stateDokSm, setDokSm] = useState(0);
+  const [stateDokLg, setDokLg] = useState(0);
 
   const BodyModal = ({ type }: { type: string }) => {
     return (
@@ -705,14 +709,21 @@ const KUDT = () => {
               borderRadius={"full"}
               alignItems={"center"}
               justifyContent={"center"}
+              cursor={"pointer"}
+              onClick={() => {
+                stateDokLg < 1 ? setDokLg(0) : setDokLg(stateDokLg - 1);
+                stateDokSm < 2 ? setDokSm(0) : setDokSm(stateDokSm - 2);
+              }}
             >
               <Image src={leftArrowDouble} boxSize={5} />
             </Flex>
             <Flex flexDir={"column"} gap={10} justifyContent={"center"}>
-              <Flex w={"full"} h={300} bgColor={"#E6E7E8"}></Flex>
+              <Image src={dokum_data.lg[stateDokLg] as string} h={300} />
+              {/* <Flex w={"full"} h={300} bgColor={"#E6E7E8"}></Flex> */}
               <Flex gap={10}>
-                <Flex boxSize={300} bgColor={"#E6E7E8"}></Flex>
-                <Flex boxSize={300} bgColor={"#E6E7E8"}></Flex>
+                <Image src={dokum_data.sm[stateDokSm] as string} w={300} />
+                {/* <Flex boxSize={300} bgColor={"#E6E7E8"}></Flex> */}
+                <Image src={dokum_data.sm[stateDokSm + 1] as string} w={300} />
               </Flex>
             </Flex>
             <Flex
@@ -722,6 +733,19 @@ const KUDT = () => {
               borderRadius={"full"}
               alignItems={"center"}
               justifyContent={"center"}
+              cursor={"pointer"}
+              onClick={() => {
+                stateDokLg > dokum_data.lg.length - 2
+                  ? setDokLg(dokum_data.lg.length - 1)
+                  : setDokLg(stateDokLg + 1);
+                stateDokSm > dokum_data.sm.length - 3
+                  ? setDokSm(dokum_data.sm.length - 2)
+                  : setDokSm(stateDokSm + 2);
+                console.log(dokum_data.lg.length);
+                console.log(dokum_data.sm.length);
+                console.log(stateDokLg);
+                console.log(stateDokSm);
+              }}
             >
               <Image src={rightArrowDouble} boxSize={5} />
             </Flex>

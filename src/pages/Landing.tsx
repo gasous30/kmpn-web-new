@@ -310,6 +310,7 @@ const ModalAbout = ({
 };
 
 const CardBKO = ({ type }: { type: string }) => {
+  const nav = useNavigate();
   return (
     <>
       <Show above="lg">
@@ -347,6 +348,15 @@ const CardBKO = ({ type }: { type: string }) => {
           <Box
             mt={10}
             bg={"#2D83BA"}
+            _hover={type === "dpa" ? { bg: "#2D83BA" } : { bg: "#1C5579" }}
+            cursor={type === "dpa" ? "normal" : "pointer"}
+            onClick={() =>
+              type === "bpp"
+                ? nav("/bpp")
+                : type === "dpa"
+                ? null
+                : nav("/senator")
+            }
             fontSize={{ xl: "xl", "2xl": "2xl" }}
             fontWeight={800}
             textShadow={"0px 3.03586px 33.3945px rgba(58, 58, 60, 0.2)"}
@@ -524,6 +534,17 @@ const Landing = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@pwkkmpnitb"
+  //     )
+  //     .then((res) => {
+  //       setAllPost(res.data.items);
+  //       console.log(res.data.items);
+  //     });
+  // }, []);
 
   // useEffect(() => {
   //   axios
